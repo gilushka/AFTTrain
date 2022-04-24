@@ -7,7 +7,8 @@ public class FirstProgram {
 
 		Point p1 = new Point(10,23);
 		Point p2 = new Point(3,78);
-		System.out.println("Расстояние между заданными точками равно:" + distance(p1, p2));
+		System.out.println("Расстояние между заданными точками равно: " + distance(p1, p2));
+		System.out.println("Расстояние между точками посчитанное методом класса равно: " + p1.distance(p2) );
 	}
 
 	public static double distance(Point p1, Point p2){
