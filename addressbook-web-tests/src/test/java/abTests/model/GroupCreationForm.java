@@ -1,4 +1,4 @@
-package abTests;
+package abTests.model;
 
 public class GroupCreationForm {
     private final String groupName;

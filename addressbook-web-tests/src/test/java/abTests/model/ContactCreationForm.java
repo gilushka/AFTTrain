@@ -1,4 +1,4 @@
-package abTests;
+package abTests.model;
 
 public class ContactCreationForm {
     private final String firstName;
