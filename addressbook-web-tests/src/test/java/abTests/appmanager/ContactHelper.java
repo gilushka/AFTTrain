@@ -25,7 +25,9 @@ public class ContactHelper extends HelperBase {
         typeValue(By.name("byear"), contactCreationForm.getBYear());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactCreationForm.getGroup());
+            if (!wd.findElement(By.name("new_group")).getAttribute("value").equals("[none]")) {
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactCreationForm.getGroup());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
