@@ -22,6 +22,7 @@ public class ContactHelper extends HelperBase {
         typeValue(By.name("middlename"), contactCreationForm.getMiddleName());
         typeValue(By.name("lastname"), contactCreationForm.getLastName());
         typeValue(By.name("nickname"), contactCreationForm.getNickName());
+        typeValue(By.name("byear"), contactCreationForm.getBYear());
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactCreationForm.getGroup());
@@ -29,7 +30,6 @@ public class ContactHelper extends HelperBase {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
 
-        typeValue(By.name("byear"), contactCreationForm.getBYear());
         typeValue(By.name("company"), contactCreationForm.getCompanyName());
         typeValue(By.name("mobile"), contactCreationForm.getPhoneNumber());
     }
