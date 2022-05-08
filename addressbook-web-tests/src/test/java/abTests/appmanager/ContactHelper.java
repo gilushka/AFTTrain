@@ -5,6 +5,7 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class ContactHelper extends HelperBase {
 
@@ -16,16 +17,19 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactCreationForm(ContactCreationForm contactCreationForm) {
+    public void fillContactCreationForm(ContactCreationForm contactCreationForm,  boolean creation) {
         typeValue(By.name("firstname"), contactCreationForm.getFirstName());
-        typeValue(By.name("middlename"), contactCreationForm.getMiddlename());
+        typeValue(By.name("middlename"), contactCreationForm.getMiddleName());
         typeValue(By.name("lastname"), contactCreationForm.getLastName());
         typeValue(By.name("nickname"), contactCreationForm.getNickName());
-        click(By.name("bday"));
-        new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactCreationForm.getbDay());
-        click(By.name("bmonth"));
-        new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactCreationForm.getbMonth());
-        typeValue(By.name("byear"), contactCreationForm.getbYear());
+
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactCreationForm.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+
+        typeValue(By.name("byear"), contactCreationForm.getBYear());
         typeValue(By.name("company"), contactCreationForm.getCompanyName());
         typeValue(By.name("mobile"), contactCreationForm.getPhoneNumber());
     }
@@ -53,5 +57,20 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactModification() {
         click(By.name("update"));
+    }
+
+    public void returnToMainPage() {
+        click(By.linkText("home page"));
+    }
+
+    public void createContact(ContactCreationForm contact) {
+        initContactCreation();
+        fillContactCreationForm(contact, true);
+        submitContactCreationForm();
+        returnToMainPage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }

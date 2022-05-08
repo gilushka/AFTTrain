@@ -9,7 +9,7 @@ public class CreateTests extends BaseTest {
   @Test
   public void testContactCreate() throws Exception {
     app.getContactHelper().initContactCreation();
-    app.getContactHelper().fillContactCreationForm(new ContactCreationForm("Вован", "Вованович", "Вованов", "Vovan", "15", "July", "1987", "Снурфики лимитед", "+79151591519"));
+    app.getContactHelper().fillContactCreationForm(new ContactCreationForm("Вован", "Вованович", "Вованов", "Vovan", "1987", "Снурфики", "Снурфики лимитед", "+79151591519"), true);
     app.getContactHelper().submitContactCreationForm();
     app.getNavigationHelper().returnToMainForm();
     app.getSessionHelper().logout();
@@ -18,11 +18,8 @@ public class CreateTests extends BaseTest {
   @Test
   public void testGroupCreate() throws Exception {
     app.getNavigationHelper().gotoGroupPage();
-    app.getGroupHelper().initGroupCreation();
-    app.getGroupHelper().fillGroupCreationForm(new GroupCreationForm("Снурфики", "Snurfics", "Сотрудники компании Снурфики"));
-    app.getGroupHelper().submitGroupCreationForm();
+    app.getGroupHelper().createGroup(new GroupCreationForm("Снурфики", "Snurfics", "Сотрудники компании Снурфики"));
     app.getNavigationHelper().returnToMainForm();
     app.getSessionHelper().logout();
   }
-
 }

@@ -2,23 +2,25 @@ package abTests.model;
 
 public class ContactCreationForm {
     private final String firstName;
-    private final String middlename;
+    private final String middleName;
     private final String lastName;
     private final String nickName;
-    private final String bDay;
-    private final String bMonth;
     private final String bYear;
+    private String group;
     private final String companyName;
     private final String phoneNumber;
 
-    public ContactCreationForm(String firstName, String middlename, String lastName, String nickName, String bDay, String bMonth, String bYear, String companyName, String phoneNumber) {
+    public String getGroup() {
+        return group;
+    }
+
+    public ContactCreationForm(String firstName, String middleName, String lastName, String nickName, String bYear, String group, String companyName, String phoneNumber) {
         this.firstName = firstName;
-        this.middlename = middlename;
+        this.middleName = middleName;
         this.lastName = lastName;
         this.nickName = nickName;
-        this.bDay = bDay;
-        this.bMonth = bMonth;
         this.bYear = bYear;
+        this.group = group;
         this.companyName = companyName;
         this.phoneNumber = phoneNumber;
     }
@@ -27,8 +29,8 @@ public class ContactCreationForm {
         return firstName;
     }
 
-    public String getMiddlename() {
-        return middlename;
+    public String getMiddleName() {
+        return middleName;
     }
 
     public String getLastName() {
@@ -39,15 +41,7 @@ public class ContactCreationForm {
         return nickName;
     }
 
-    public String getbDay() {
-        return bDay;
-    }
-
-    public String getbMonth() {
-        return bMonth;
-    }
-
-    public String getbYear() {
+    public String getBYear() {
         return bYear;
     }
 
