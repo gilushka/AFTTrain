@@ -45,7 +45,7 @@ public class DeleteTest extends BaseTest {
 
         before.remove(before.size()-1);
         Assert.assertEquals(after, before);
-        
+
         app.getSessionHelper().logout();
     }
 

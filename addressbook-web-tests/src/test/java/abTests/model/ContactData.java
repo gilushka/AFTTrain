@@ -8,29 +8,19 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(adress, that.adress) && Objects.equals(email, that.email) && Objects.equals(group, that.group) && Objects.equals(phoneNumber, that.phoneNumber);
+        return Objects.equals(id, that.id) && Objects.equals(firstName, that.firstName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, adress, email, group, phoneNumber);
+        return Objects.hash(id, firstName);
     }
 
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", adress='" + adress + '\'' +
-                ", email='" + email + '\'' +
-                ", group='" + group + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
-    }
+    private final String id;
 
     private final String firstName;
     private final String lastName;
-    private final String adress;
+    private final String address;
     private final String email;
     private String group;
     private final String phoneNumber;
@@ -39,13 +29,28 @@ public class ContactData {
         return group;
     }
 
-    public ContactData(String firstName, String lastName, String adress, String email, String group,String phoneNumber) {
-        this.firstName = firstName;
+    public ContactData(String lastName, String firstName, String address, String email, String group,String phoneNumber) {
+        this.id = null;
         this.lastName = lastName;
-        this.adress = adress;
+        this.firstName = firstName;
+        this.address = address;
         this.email = email;
         this.group = group;
         this.phoneNumber = phoneNumber;
+    }
+
+    public ContactData(String id, String lastName, String firstName, String address, String email, String group,String phoneNumber) {
+        this.id = id;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.address = address;
+        this.email = email;
+        this.group = group;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -56,15 +61,28 @@ public class ContactData {
         return lastName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public String getEMail() {
+    public String getEmail() {
         return email;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", group='" + group + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }

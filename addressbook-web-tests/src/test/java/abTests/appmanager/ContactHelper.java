@@ -24,8 +24,8 @@ public class ContactHelper extends HelperBase {
     public void fillContactCreationForm(ContactData contactCreationForm, boolean creation) {
         typeValue(By.name("firstname"), contactCreationForm.getFirstName());
         typeValue(By.name("lastname"), contactCreationForm.getLastName());
-        typeValue(By.name("adress"), contactCreationForm.getAdress());
-        typeValue(By.name("email"), contactCreationForm.getEMail());
+        typeValue(By.name("address"), contactCreationForm.getAddress());
+        typeValue(By.name("email"), contactCreationForm.getEmail());
 
         if (creation) {
             if (!wd.findElement(By.name("new_group")).getAttribute("value").equals("[none]")) {
@@ -55,8 +55,8 @@ public class ContactHelper extends HelperBase {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
-    public void initContactModification() {
-        click(By.xpath("//img[@alt='Edit']"));
+    public void initContactModification(String id) {
+        click(By.xpath("//a[@href='edit.php?id=" + id + "']"));
     }
 
     public void submitContactModification() {
@@ -83,13 +83,18 @@ public class ContactHelper extends HelperBase {
     }
 
     public List<ContactData> getContactList() {
-        List<ContactData> groups = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.xpath("//tbody/tr/td[2]"));
+        List<ContactData> contacts = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
         for (WebElement element: elements) {
-            String name = element.getText();
-            ContactData group = new ContactData(name, null, null, null, null, null);
-            groups.add(group);
+            String id = element.findElement(By.tagName("input")).getAttribute("value");
+            String lastName = element.findElement(By.xpath("./td[2]")).getText();
+            String firstName = element.findElement(By.xpath("./td[3]")).getText();
+            String address = element.findElement(By.xpath("./td[4]")).getText();
+            String allEmail = element.findElement(By.xpath("./td[5]")).getText();
+            String allPhones = element.findElement(By.xpath("./td[6]")).getText();
+            ContactData contact = new ContactData(id, lastName, firstName, address, allEmail, null, allPhones);
+            contacts.add(contact);
         }
-        return groups;
+        return contacts;
     }
 }

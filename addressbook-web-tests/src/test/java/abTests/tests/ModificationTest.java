@@ -5,6 +5,7 @@ import abTests.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class ModificationTest extends BaseTest {
@@ -18,11 +19,16 @@ public class ModificationTest extends BaseTest {
         List<GroupData> before = app.getGroupHelper().getGroupList();
         app.getGroupHelper().selectGroup(before.size() - 1);
         app.getGroupHelper().initGroupModification();
-        app.getGroupHelper().fillGroupCreationForm(new GroupData("Снурфики", "New Snurfics", "Сотрудники компании Новые Снурфики"));
+        GroupData group = new GroupData(before.get(before.size() - 1).getGroupId(), "Снурфики", "New Snurfics", "Сотрудники компании Новые Снурфики");
+        app.getGroupHelper().fillGroupCreationForm(group);
         app.getGroupHelper().submitGroupModification();
         app.getGroupHelper().returnToGroupPage();
         List<GroupData> after = app.getGroupHelper().getGroupList();
         Assert.assertEquals(after.size(), before.size());
+
+        before.remove(before.size()-1);
+        before.add(group);
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
         app.getNavigationHelper().returnToMainForm();
         app.getSessionHelper().logout();
     }
@@ -34,12 +40,19 @@ public class ModificationTest extends BaseTest {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().initContactModification();
-        app.getContactHelper().fillContactCreationForm(new ContactData("Котлован", "Котлованов", "Kotlovan", "kotlovan@mail.ru", null, "+79151591519"), false);
+        String id = before.get(before.size() - 1).getId();
+        app.getContactHelper().initContactModification(id);
+//        ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "Котлованов", "Котлован", "Kotlovan", "kotlovan@mail.ru", null, "+79151591519");
+        ContactData contact = new ContactData(id, "Караванов", "Караван", "Karavan", "karavan@mail.ru", null, "+79151591519");
+        app.getContactHelper().fillContactCreationForm(contact, false);
         app.getContactHelper().submitContactModification();
         app.getNavigationHelper().returnToMainForm();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
+
+        before.remove(before.size()-1);
+        before.add(contact);
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
         app.getSessionHelper().logout();
     }
 }
