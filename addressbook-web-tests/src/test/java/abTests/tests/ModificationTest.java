@@ -40,9 +40,8 @@ public class ModificationTest extends BaseTest {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
-        String id = before.get(before.size() - 1).getId();
+        int id = before.get(before.size() - 1).getId();
         app.getContactHelper().initContactModification(id);
-//        ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "Котлованов", "Котлован", "Kotlovan", "kotlovan@mail.ru", null, "+79151591519");
         ContactData contact = new ContactData(id, "Караванов", "Караван", "Karavan", "karavan@mail.ru", null, "+79151591519");
         app.getContactHelper().fillContactCreationForm(contact, false);
         app.getContactHelper().submitContactModification();

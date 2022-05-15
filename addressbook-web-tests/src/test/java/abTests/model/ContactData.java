@@ -16,7 +16,7 @@ public class ContactData {
         return Objects.hash(id, firstName);
     }
 
-    private final String id;
+    private int id;
 
     private final String firstName;
     private final String lastName;
@@ -30,7 +30,7 @@ public class ContactData {
     }
 
     public ContactData(String lastName, String firstName, String address, String email, String group,String phoneNumber) {
-        this.id = null;
+        this.id = 0;
         this.lastName = lastName;
         this.firstName = firstName;
         this.address = address;
@@ -39,7 +39,7 @@ public class ContactData {
         this.phoneNumber = phoneNumber;
     }
 
-    public ContactData(String id, String lastName, String firstName, String address, String email, String group,String phoneNumber) {
+    public ContactData(int id, String lastName, String firstName, String address, String email, String group,String phoneNumber) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -49,7 +49,7 @@ public class ContactData {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -71,6 +71,10 @@ public class ContactData {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
