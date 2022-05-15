@@ -1,8 +1,12 @@
 package abTests.appmanager;
 
-import abTests.model.GroupCreationForm;
+import abTests.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupHelper extends HelperBase {
 
@@ -14,7 +18,7 @@ public class GroupHelper extends HelperBase {
         click(By.name("submit"));
     }
 
-    public void fillGroupCreationForm(GroupCreationForm groupCreationForm) {
+    public void fillGroupCreationForm(GroupData groupCreationForm) {
         typeValue(By.name("group_name"), groupCreationForm.getGroupName());
         typeValue(By.name("group_header"), groupCreationForm.getGroupHeader());
         typeValue(By.name("group_footer"), groupCreationForm.getGroupFooter());
@@ -32,8 +36,8 @@ public class GroupHelper extends HelperBase {
         click(By.name("delete"));
     }
 
-    public void selectGroup() {
-        click(By.name("selected[]"));
+    public void selectGroup(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void initGroupModification() {
@@ -44,7 +48,7 @@ public class GroupHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void createGroup(GroupCreationForm group) {
+    public void createGroup(GroupData group) {
         initGroupCreation();
         fillGroupCreationForm(group);
         submitGroupCreationForm();
@@ -53,5 +57,20 @@ public class GroupHelper extends HelperBase {
 
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<GroupData> getGroupList() {
+        List<GroupData> groups = new ArrayList<GroupData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element: elements) {
+            String name = element.getText();
+            GroupData group = new GroupData(name, null, null);
+            groups.add(group);
+        }
+        return groups;
     }
 }

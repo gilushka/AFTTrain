@@ -1,20 +1,12 @@
 package abTests.appmanager;
 
-import abTests.model.ContactCreationForm;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
-
-import static org.testng.Assert.assertTrue;
 
 public class ApplicationManager {
 
