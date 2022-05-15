@@ -3,18 +3,6 @@ package abTests.model;
 import java.util.Objects;
 
 public class ContactData {
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return Objects.equals(id, that.id) && Objects.equals(firstName, that.firstName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName);
-    }
 
     private int id;
 
@@ -30,7 +18,7 @@ public class ContactData {
     }
 
     public ContactData(String lastName, String firstName, String address, String email, String group,String phoneNumber) {
-        this.id = 0;
+        this.id = Integer.MAX_VALUE;
         this.lastName = lastName;
         this.firstName = firstName;
         this.address = address;
@@ -88,5 +76,18 @@ public class ContactData {
                 ", group='" + group + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 }
