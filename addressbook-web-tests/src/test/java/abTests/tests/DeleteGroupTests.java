@@ -13,7 +13,7 @@ public class DeleteGroupTests extends BaseTest {
     public void ensurePreconditions() {
         app.getNavigationHelper().gotoGroupPage();
         if (!app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData("Снурфики", null, null));
+            app.getGroupHelper().createGroup(new GroupData().withGroupName("Снурфики"));
         }
     }
 

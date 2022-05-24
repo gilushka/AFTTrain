@@ -14,7 +14,7 @@ public class CreateGroupTests extends BaseTest {
   public void testGroupCreate() throws Exception {
     app.getNavigationHelper().gotoGroupPage();
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    GroupData group = new GroupData("Снурфики", "Snurfics", "Сотрудники компании Снурфики");
+    GroupData group = new GroupData().withGroupName("Снурфики").withGroupHeader("Snurfics").withGroupFooter("Сотрудники компании Снурфики");
     app.getGroupHelper().createGroup(group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() + 1);

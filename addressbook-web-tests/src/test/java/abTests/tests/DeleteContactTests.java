@@ -13,11 +13,16 @@ public class DeleteContactTests extends BaseTest {
     @BeforeMethod
     public void ensurePrecondition() {
         if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData("Вован", "Вованов", null, "vovan@mail.ru", "Снурфики", "+79151591519"));
+            app.getContactHelper().createContact(new ContactData()
+                    .withFirstName("Гохан")
+                    .withLastName("Гоханов")
+                    .withEmail("gohan@mail.ru")
+                    .withGroup("Снурфики")
+                    .withPhoneNumber("+79151591519"));
         }
     }
 
-    @Test (enabled = false)
+    @Test
     public void testContactDelete() throws Exception {
         List<ContactData> before = app.getContactHelper().getContactList();
         int index = before.size() - 1;

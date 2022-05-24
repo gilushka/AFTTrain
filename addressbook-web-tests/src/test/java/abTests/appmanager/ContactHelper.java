@@ -86,7 +86,6 @@ public class ContactHelper extends HelperBase {
         selectContact(index);
         deleteSelectedContact();
         acceptAlert();
-        returnToMainPage();
     }
 
     public boolean isThereAContact() {
@@ -107,7 +106,13 @@ public class ContactHelper extends HelperBase {
             String address = element.findElement(By.xpath("./td[4]")).getText();
             String allEmail = element.findElement(By.xpath("./td[5]")).getText();
             String allPhones = element.findElement(By.xpath("./td[6]")).getText();
-            ContactData contact = new ContactData(id, lastName, firstName, address, allEmail, null, allPhones);
+            ContactData contact = new ContactData()
+                    .withId(id)
+                    .withLastName(lastName)
+                    .withFirstName(firstName)
+                    .withAddress(address)
+                    .withEmail(allEmail)
+                    .withPhoneNumber(allPhones);
             contacts.add(contact);
         }
         return contacts;

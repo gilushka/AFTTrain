@@ -4,37 +4,16 @@ import java.util.Objects;
 
 public class ContactData {
 
-    private int id;
-
-    private final String firstName;
-    private final String lastName;
-    private final String address;
-    private final String email;
+    private int id = Integer.MAX_VALUE;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String email;
     private String group;
-    private final String phoneNumber;
+    private String phoneNumber;
 
     public String getGroup() {
         return group;
-    }
-
-    public ContactData(String lastName, String firstName, String address, String email, String group,String phoneNumber) {
-        this.id = Integer.MAX_VALUE;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.address = address;
-        this.email = email;
-        this.group = group;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public ContactData(int id, String lastName, String firstName, String address, String email, String group,String phoneNumber) {
-        this.id = id;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.address = address;
-        this.email = email;
-        this.group = group;
-        this.phoneNumber = phoneNumber;
     }
 
     public int getId() {
@@ -61,8 +40,39 @@ public class ContactData {
         return phoneNumber;
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public ContactData withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    public ContactData withPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
     }
 
     @Override
