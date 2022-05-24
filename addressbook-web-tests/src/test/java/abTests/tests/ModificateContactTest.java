@@ -1,7 +1,6 @@
 package abTests.tests;
 
 import abTests.model.ContactData;
-import abTests.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -27,7 +26,7 @@ public class ModificateContactTest extends BaseTest {
         int index = before.size() - 1;
         int id = before.get(index).getId();
         ContactData contact = new ContactData(id, "Караванов", "Караван", "Karavan", "karavan@mail.ru", null, "+79151591519");
-        app.getContactHelper().modifyGroup(index, id, contact);
+        app.getContactHelper().modifyContact(index, id, contact);
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 

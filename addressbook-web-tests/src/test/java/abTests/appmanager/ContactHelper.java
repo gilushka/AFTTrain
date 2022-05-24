@@ -74,11 +74,18 @@ public class ContactHelper extends HelperBase {
         returnToMainPage();
     }
 
-    public void modifyGroup(int index, int id, ContactData contact) {
+    public void modifyContact(int index, int id, ContactData contact) {
         selectContact(index);
         initContactModification(id);
         fillContactCreationForm(contact, false);
         submitContactModification();
+        returnToMainPage();
+    }
+
+    public void deleteContact(int index) {
+        selectContact(index);
+        deleteSelectedContact();
+        acceptAlert();
         returnToMainPage();
     }
 

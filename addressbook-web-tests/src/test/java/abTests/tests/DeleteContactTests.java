@@ -20,14 +20,12 @@ public class DeleteContactTests extends BaseTest {
     @Test (enabled = false)
     public void testContactDelete() throws Exception {
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().deleteSelectedContact();
-        app.getContactHelper().acceptAlert();
-        app.getNavigationHelper().returnToMainForm();
+        int index = before.size() - 1;
+        app.getContactHelper().deleteContact(index);
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(before.size()-1);
+        before.remove(index);
         Assert.assertEquals(after, before);
     }
 

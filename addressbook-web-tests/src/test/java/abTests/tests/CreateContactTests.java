@@ -13,11 +13,8 @@ public class CreateContactTests extends BaseTest {
   @Test (enabled = false)
   public void testContactCreate() throws Exception {
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().initContactCreation();
     ContactData contact = new ContactData("Вован", "Вованов", null, "vovan@mail.ru", "Снурфики", "+79151591519");
-    app.getContactHelper().fillContactCreationForm(contact, true);
-    app.getContactHelper().submitContactCreationForm();
-    app.getNavigationHelper().returnToMainForm();
+    app.getContactHelper().createContact(contact);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 

@@ -1,6 +1,5 @@
 package abTests.tests;
 
-import abTests.model.ContactData;
 import abTests.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -21,13 +20,12 @@ public class DeleteGroupTests extends BaseTest {
     @Test
     public void testGroupDelete() throws Exception {
         List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(before.size() - 1);
-        app.getGroupHelper().deleteGroup();
-        app.getGroupHelper().returnToGroupPage();
+        int index = before.size() - 1;
+        app.getGroupHelper().deleteGroup(index);
         List<GroupData> after = app.getGroupHelper().getGroupList();
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(before.size()-1);
+        before.remove(index);
         Assert.assertEquals(after, before);
 
         app.getNavigationHelper().returnToMainForm();
