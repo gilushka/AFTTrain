@@ -5,15 +5,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ModificateContactTest extends BaseTest {
 
     @BeforeMethod
     public void ensurePrecondition() {
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData()
+        if (app.contact().all().size() == 0) {
+            app.contact().create(new ContactData()
                     .withFirstName("Вован")
                     .withLastName("Вованов")
                     .withEmail("vovan@mail.ru")
@@ -24,25 +23,21 @@ public class ModificateContactTest extends BaseTest {
 
     @Test
     public void testContactModification() {
-        List<ContactData> before = app.getContactHelper().getContactList();
-        int index = before.size() - 1;
-        int id = before.get(index).getId();
+        Set<ContactData> before = app.contact().all();
+        ContactData modifiedContact = before.iterator().next();
         ContactData contact = new ContactData()
-                .withId(id)
+                .withId(modifiedContact.getId())
                 .withFirstName("Караван")
                 .withLastName("Караванов")
                 .withAddress("Karavan")
                 .withEmail("karavan@mail.ru")
                 .withPhoneNumber("+79151591519");
-        app.getContactHelper().modifyContact(index, id, contact);
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().modify(contact);
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(index);
+        before.remove(modifiedContact);
         before.add(contact);
-        Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-        before.sort(byId);
-        after.sort(byId);
         Assert.assertEquals(before, after);
     }
 }

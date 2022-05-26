@@ -1,19 +1,18 @@
 package abTests.tests;
 
 import abTests.model.ContactData;
-import abTests.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
+import java.util.Set;
 
 public class DeleteContactTests extends BaseTest {
 
     @BeforeMethod
     public void ensurePrecondition() {
-        if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(new ContactData()
+        if (app.contact().all().size() == 0) {
+            app.contact().create(new ContactData()
                     .withFirstName("Гохан")
                     .withLastName("Гоханов")
                     .withEmail("gohan@mail.ru")
@@ -24,13 +23,14 @@ public class DeleteContactTests extends BaseTest {
 
     @Test
     public void testContactDelete() throws Exception {
-        List<ContactData> before = app.getContactHelper().getContactList();
-        int index = before.size() - 1;
-        app.getContactHelper().deleteContact(index);
-        List<ContactData> after = app.getContactHelper().getContactList();
+        Set<ContactData> before = app.contact().all();
+        ContactData deletedContact = before.iterator().next();
+        app.contact().delete(deletedContact);
+        app.goTo().mainForm();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(index);
+        before.remove(deletedContact);
         Assert.assertEquals(after, before);
     }
 
