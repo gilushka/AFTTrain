@@ -50,15 +50,15 @@ public class ApplicationManager {
         return groupHelper;
     }
 
+    public ContactHelper contact() {
+        return contactHelper;
+    }
+
     public NavigationHelper goTo() {
         return navigationHelper;
     }
 
     public SessionHelper getSessionHelper() {
         return sessionHelper;
-    }
-
-    public ContactHelper contact() {
-        return contactHelper;
     }
 }
