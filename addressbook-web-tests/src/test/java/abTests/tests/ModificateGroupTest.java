@@ -34,8 +34,8 @@ public class ModificateGroupTest extends BaseTest {
                 .withGroupHeader("New Snurfics")
                 .withGroupFooter("Сотрудники компании Новые Снурфики");
         app.group().modify(group);
+        assertThat(app.group().count(), equalTo(before.size()));
         Groups after = app.group().all();
-        assertEquals(after.size(), before.size());
 
         assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
         app.goTo().mainForm();

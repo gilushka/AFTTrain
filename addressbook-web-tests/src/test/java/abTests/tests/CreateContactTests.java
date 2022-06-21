@@ -2,11 +2,7 @@ package abTests.tests;
 
 import abTests.model.ContactData;
 import abTests.model.Contacts;
-import abTests.model.Groups;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,12 +16,12 @@ public class CreateContactTests extends BaseTest {
     ContactData contact = new ContactData()
             .withFirstName("Вован")
             .withLastName("Вованов")
-            .withEmail("vovan@mail.ru")
+            .withEmail1("vovan@mail.ru")
             .withGroup("Снурфики")
-            .withPhoneNumber("+79151591519");
+            .withMobilePhone("+79151591519");
     app.contact().create(contact);
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
-    assertEquals(after.size(), before.size() + 1);
 
     assertThat(after, equalTo(before
             .withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));

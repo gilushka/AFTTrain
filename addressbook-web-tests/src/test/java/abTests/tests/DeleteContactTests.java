@@ -2,15 +2,11 @@ package abTests.tests;
 
 import abTests.model.ContactData;
 import abTests.model.Contacts;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Set;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.*;
 
 public class DeleteContactTests extends BaseTest {
 
@@ -20,9 +16,9 @@ public class DeleteContactTests extends BaseTest {
             app.contact().create(new ContactData()
                     .withFirstName("Гохан")
                     .withLastName("Гоханов")
-                    .withEmail("gohan@mail.ru")
+                    .withEmail1("gohan@mail.ru")
                     .withGroup("Снурфики")
-                    .withPhoneNumber("+79151591519"));
+                    .withMobilePhone("+79151591519"));
         }
     }
 
@@ -32,8 +28,8 @@ public class DeleteContactTests extends BaseTest {
         ContactData deletedContact = before.iterator().next();
         app.contact().delete(deletedContact);
         app.goTo().mainForm();
+        assertThat(app.contact().count(), equalTo(before.size() - 1));
         Contacts after = app.contact().all();
-        assertEquals(after.size(), before.size() - 1);
 
         assertThat(after, equalTo(before.without(deletedContact)));
     }
