@@ -24,7 +24,8 @@ public class ContactDataTests extends BaseTest {
                     .withWorkPhone("666")
                     .withEmail1("first@email.ru")
                     .withEmail2("second@email.ru")
-                    .withEmail3("third@email.ru"));
+                    .withEmail3("third-email ru")
+                    .withSecondPhone("777"));
         }
     }
 
@@ -42,12 +43,11 @@ public class ContactDataTests extends BaseTest {
     private String mergeEmails(ContactData contact) {
         return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
                 .stream().filter(s -> ! s.equals(""))
-                .map(ContactDataTests::cleaned)
                 .collect(Collectors.joining("\n"));
     }
 
     private String mergePhones(ContactData contact) {
-        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+        return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getPhone2())
                 .stream().filter(s -> ! s.equals(""))
                 .map(ContactDataTests::cleaned)
                 .collect(Collectors.joining("\n"));

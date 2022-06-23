@@ -17,6 +17,7 @@ public class ContactData {
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
+    private String phone2;
 
     public String getGroup() {
         return group;
@@ -68,6 +69,10 @@ public class ContactData {
 
     public String getWorkPhone() {
         return workPhone;
+    }
+
+    public String getPhone2() {
+        return phone2;
     }
 
     public ContactData withId(int id) {
@@ -135,6 +140,11 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withSecondPhone(String phone2) {
+        this.phone2 = phone2;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "ContactData{" +
@@ -149,6 +159,7 @@ public class ContactData {
                 ", homePhone='" + homePhone + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 ", workPhone='" + workPhone + '\'' +
+                ", phone2='" + phone2 + '\'' +
                 '}';
     }
 
