@@ -26,6 +26,7 @@ public class ContactHelper extends HelperBase {
         typeValue(By.name("lastname"), contactCreationForm.getLastName());
         typeValue(By.name("address"), contactCreationForm.getAddress());
         typeValue(By.name("email"), contactCreationForm.getEmail1());
+        attach(By.name("photo"), contactCreationForm.getPhoto());
 
         if (creation) {
             if (!wd.findElement(By.name("new_group")).getAttribute("value").equals("[none]")) {

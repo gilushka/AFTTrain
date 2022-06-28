@@ -6,6 +6,9 @@ repositories {
 
 dependencies {
     testImplementation group: 'org.testng', name: 'testng', version: '7.5'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.1.4'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.3.0'
     implementation 'org.hamcrest:java-hamcrest:2.0.0.0'
+    implementation 'com.beust:jcommander:1.82'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.19'
+    implementation 'com.google.code.gson:gson:2.9.0'
 }

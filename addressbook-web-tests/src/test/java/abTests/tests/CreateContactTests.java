@@ -4,6 +4,8 @@ import abTests.model.ContactData;
 import abTests.model.Contacts;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
@@ -13,11 +15,12 @@ public class CreateContactTests extends BaseTest {
   @Test
   public void testContactCreate() throws Exception {
     Contacts before = app.contact().all();
+    File photo = new File("src/test/resources/photo1.png");
     ContactData contact = new ContactData()
             .withFirstName("Вован")
             .withLastName("Вованов")
             .withEmail1("vovan@mail.ru")
-            .withGroup("Снурфики")
+            .withPhoto(photo)
             .withMobilePhone("+79151591519");
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));

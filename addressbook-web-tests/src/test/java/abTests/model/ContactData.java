@@ -1,5 +1,6 @@
 package abTests.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -18,6 +19,8 @@ public class ContactData {
     private String mobilePhone;
     private String workPhone;
     private String phone2;
+
+    private File photo;
 
     public String getGroup() {
         return group;
@@ -73,6 +76,10 @@ public class ContactData {
 
     public String getPhone2() {
         return phone2;
+    }
+
+    public File getPhoto() {
+        return photo;
     }
 
     public ContactData withId(int id) {
@@ -142,6 +149,11 @@ public class ContactData {
 
     public ContactData withSecondPhone(String phone2) {
         this.phone2 = phone2;
+        return this;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
         return this;
     }
 
