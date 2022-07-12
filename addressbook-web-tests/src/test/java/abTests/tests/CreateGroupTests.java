@@ -4,6 +4,8 @@ import abTests.model.ContactData;
 import abTests.model.GroupData;
 import abTests.model.Groups;
 import com.google.gson.Gson;
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import com.thoughtworks.xstream.XStream;
 import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.*;
@@ -19,6 +21,8 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CreateGroupTests extends BaseTest {
+
+  Logger logger = LoggerFactory.getLogger(CreateGroupTests.class);
   private Properties properties;
 
   @DataProvider
@@ -57,10 +61,10 @@ public class CreateGroupTests extends BaseTest {
   @Test(dataProvider = "validGroupsFromJson")
   public void testGroupCreate(GroupData group){
     app.goTo().groupPage();
-    Groups before = app.group().all();
+    Groups before = app.db().groups();
     app.group().create(group);
     assertThat(app.group().count(), equalTo(before.size() + 1));
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
 
     assertThat(after, equalTo(before
             .withAdded(group.withGroupId(after.stream().mapToInt((g) -> g.getGroupId()).max().getAsInt()))));

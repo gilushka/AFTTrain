@@ -26,16 +26,17 @@ public class ModificateGroupTest extends BaseTest {
 
     @Test
     public void testGroupModification() {
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData()
                 .withGroupId(modifiedGroup.getGroupId())
                 .withGroupName("Снурфики")
                 .withGroupHeader("New Snurfics")
                 .withGroupFooter("Сотрудники компании Новые Снурфики");
+        app.goTo().groupPage();
         app.group().modify(group);
         assertThat(app.group().count(), equalTo(before.size()));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
         assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
         app.goTo().mainForm();

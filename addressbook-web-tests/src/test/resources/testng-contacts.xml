@@ -4,8 +4,8 @@
     <test name="Contacts">
         <classes>
             <class name="abTests.tests.CreateContactTests" />
-<!--            <class name="abTests.tests.ModificateContactTest" />-->
-<!--            <class name="abTests.tests.DeleteContactTests" />-->
+            <class name="abTests.tests.ModificateContactTest" />
+            <class name="abTests.tests.DeleteContactTests" />
         </classes>
     </test>
 </suite>

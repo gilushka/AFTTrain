@@ -3,19 +3,36 @@ package abTests.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @XStreamAlias("group")
+@Entity
+@Table(name = "group_list")
 public class GroupData {
 
     @XStreamOmitField
+    @Id
+    @Column(name = "group_id")
     private int groupId = Integer.MAX_VALUE;
+
     @Expose
+    @Column(name = "group_name")
     private String groupName;
+
     @Expose
+    @Column(name = "group_header")
+    @Type(type = "text")
     private String groupHeader;
+
     @Expose
+    @Column(name = "group_footer")
+    @Type(type = "text")
     private String groupFooter;
 
     public int getGroupId() {
@@ -59,12 +76,12 @@ public class GroupData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
-        return groupId == groupData.groupId && Objects.equals(groupName, groupData.groupName);
+        return groupId == groupData.groupId && Objects.equals(groupName, groupData.groupName) && Objects.equals(groupHeader, groupData.groupHeader) && Objects.equals(groupFooter, groupData.groupFooter);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupId, groupName);
+        return Objects.hash(groupId, groupName, groupHeader, groupFooter);
     }
 
     @Override
