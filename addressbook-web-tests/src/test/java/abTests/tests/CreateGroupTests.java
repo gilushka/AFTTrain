@@ -23,11 +23,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CreateGroupTests extends BaseTest {
 
   Logger logger = LoggerFactory.getLogger(CreateGroupTests.class);
-  private Properties properties;
+//  private Properties properties;
 
   @DataProvider
   public Iterator<Object[]> validGroupsFromXml() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(properties.getProperty("testData.groupsXml")))){
+    try (BufferedReader reader = new BufferedReader(new FileReader(app.getProperties().getProperty("testData.groupsXml")))){
       String xml = "";
       String line = reader.readLine();
       while (line != null) {
@@ -45,7 +45,7 @@ public class CreateGroupTests extends BaseTest {
 
   @DataProvider
   public Iterator<Object[]> validGroupsFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(properties.getProperty("testData.groupsJson")))){
+    try (BufferedReader reader = new BufferedReader(new FileReader(app.getProperties().getProperty("testData.groupsJson")))){
       String json = "";
       String line = reader.readLine();
       while (line != null) {

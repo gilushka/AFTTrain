@@ -25,7 +25,7 @@ public class ApplicationManager {
 
     public ApplicationManager(String browser){
         this.browser = browser;
-        properties = new Properties();
+        this.properties = new Properties();
     }
 
     public void init() throws IOException {
@@ -74,5 +74,9 @@ public class ApplicationManager {
 
     public DbHelper db() {
         return dbHelper;
+    }
+
+    public Properties getProperties() {
+        return properties;
     }
 }

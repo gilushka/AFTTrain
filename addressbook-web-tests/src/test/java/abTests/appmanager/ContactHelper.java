@@ -26,6 +26,8 @@ public class ContactHelper extends HelperBase {
         typeValue(By.name("lastname"), contactCreationForm.getLastName());
         typeValue(By.name("address"), contactCreationForm.getAddress());
         typeValue(By.name("email"), contactCreationForm.getEmail1());
+        typeValue(By.name("email2"), contactCreationForm.getEmail2());
+        typeValue(By.name("email3"), contactCreationForm.getEmail3());
         attach(By.name("photo"), contactCreationForm.getPhoto());
 
         if (creation) {
@@ -36,7 +38,10 @@ public class ContactHelper extends HelperBase {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
 
+        typeValue(By.name("home"), contactCreationForm.getHomePhone());
         typeValue(By.name("mobile"), contactCreationForm.getMobilePhone());
+        typeValue(By.name("work"), contactCreationForm.getWorkPhone());
+        typeValue(By.name("phone2"), contactCreationForm.getPhone2());
     }
 
     public void initContactCreation() {

@@ -25,7 +25,7 @@ public class CreateContactTests extends BaseTest {
 
   @DataProvider
   public Iterator<Object[]> validContactsFromXml() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(properties.getProperty("testData.contactXml")))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(app.getProperties().getProperty("testData.contactXml")))) {
       String xml = "";
       String line = reader.readLine();
       while (line != null) {
@@ -42,7 +42,7 @@ public class CreateContactTests extends BaseTest {
 
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(properties.getProperty("testData.contactJson")))){
+    try (BufferedReader reader = new BufferedReader(new FileReader(app.getProperties().getProperty("testData.contactJson")))){
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -57,11 +57,11 @@ public class CreateContactTests extends BaseTest {
 
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreate(ContactData contact) throws Exception {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/photo1.png");
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
 
     assertThat(after, equalTo(before
             .withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
