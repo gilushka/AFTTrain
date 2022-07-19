@@ -30,6 +30,7 @@ public class DeleteGroupTests extends BaseTest {
         Groups after = app.db().groups();
 
         assertThat(after, equalTo(before.without(deletedGroup)));
+        verifyGroupListInUI();
         app.goTo().mainForm();
     }
 }

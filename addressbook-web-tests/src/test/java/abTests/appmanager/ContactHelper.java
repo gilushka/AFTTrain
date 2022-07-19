@@ -21,27 +21,28 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactCreationForm(ContactData contactCreationForm, boolean creation) {
-        typeValue(By.name("firstname"), contactCreationForm.getFirstName());
-        typeValue(By.name("lastname"), contactCreationForm.getLastName());
-        typeValue(By.name("address"), contactCreationForm.getAddress());
-        typeValue(By.name("email"), contactCreationForm.getEmail1());
-        typeValue(By.name("email2"), contactCreationForm.getEmail2());
-        typeValue(By.name("email3"), contactCreationForm.getEmail3());
-        attach(By.name("photo"), contactCreationForm.getPhoto());
+    public void fillContactCreationForm(ContactData contactData, boolean creation) {
+        typeValue(By.name("firstname"), contactData.getFirstName());
+        typeValue(By.name("lastname"), contactData.getLastName());
+        typeValue(By.name("address"), contactData.getAddress());
+        typeValue(By.name("email"), contactData.getEmail1());
+        typeValue(By.name("email2"), contactData.getEmail2());
+        typeValue(By.name("email3"), contactData.getEmail3());
+        attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
-            if (!wd.findElement(By.name("new_group")).getAttribute("value").equals("[none]")) {
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactCreationForm.getGroup());
+            if (wd.findElement(By.name("new_group")).getAttribute("value").equals("[none]")) {
+                new Select(wd.findElement(By.name("new_group")))
+                        .selectByVisibleText(contactData.getGroups().iterator().next().getGroupName());
             }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
 
-        typeValue(By.name("home"), contactCreationForm.getHomePhone());
-        typeValue(By.name("mobile"), contactCreationForm.getMobilePhone());
-        typeValue(By.name("work"), contactCreationForm.getWorkPhone());
-        typeValue(By.name("phone2"), contactCreationForm.getPhone2());
+        typeValue(By.name("home"), contactData.getHomePhone());
+        typeValue(By.name("mobile"), contactData.getMobilePhone());
+        typeValue(By.name("work"), contactData.getWorkPhone());
+        typeValue(By.name("phone2"), contactData.getPhone2());
     }
 
     public void initContactCreation() {

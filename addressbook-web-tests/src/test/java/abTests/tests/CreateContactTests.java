@@ -2,6 +2,7 @@ package abTests.tests;
 
 import abTests.model.ContactData;
 import abTests.model.Contacts;
+import abTests.model.Groups;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 import org.openqa.selenium.json.TypeToken;
@@ -57,6 +58,7 @@ public class CreateContactTests extends BaseTest {
 
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreate(ContactData contact) throws Exception {
+    Groups groups = app.db().groups();
     Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/photo1.png");
     app.contact().create(contact);
@@ -65,5 +67,6 @@ public class CreateContactTests extends BaseTest {
 
     assertThat(after, equalTo(before
             .withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    verifyContactListInUI();
   }
 }

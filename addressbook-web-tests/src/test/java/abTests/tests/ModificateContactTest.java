@@ -17,7 +17,6 @@ public class ModificateContactTest extends BaseTest {
                     .withFirstName("Вован")
                     .withLastName("Вованов")
                     .withEmail1("vovan@mail.ru")
-                    .withGroup("Снурфики")
                     .withMobilePhone("+79151591519"));
         }
     }
@@ -43,5 +42,6 @@ public class ModificateContactTest extends BaseTest {
         Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+        verifyContactListInUI();
     }
 }

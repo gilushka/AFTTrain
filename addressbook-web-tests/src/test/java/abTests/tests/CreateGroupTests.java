@@ -68,6 +68,7 @@ public class CreateGroupTests extends BaseTest {
 
     assertThat(after, equalTo(before
             .withAdded(group.withGroupId(after.stream().mapToInt((g) -> g.getGroupId()).max().getAsInt()))));
+    verifyGroupListInUI();
     app.goTo().mainForm();
   }
 

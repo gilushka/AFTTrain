@@ -17,7 +17,6 @@ public class DeleteContactTests extends BaseTest {
                     .withFirstName("Гохан")
                     .withLastName("Гоханов")
                     .withEmail1("gohan@mail.ru")
-                    .withGroup("Снурфики")
                     .withMobilePhone("+79151591519"));
         }
     }
@@ -32,6 +31,7 @@ public class DeleteContactTests extends BaseTest {
         Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.without(deletedContact)));
+        verifyContactListInUI();
     }
 
 }
