@@ -2,6 +2,8 @@ package abTests.appmanager;
 
 import abTests.model.ContactData;
 import abTests.model.Contacts;
+import abTests.model.GroupData;
+import abTests.model.Groups;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +12,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.testng.Assert.*;
 
 public class ContactHelper extends HelperBase {
 
@@ -31,12 +36,15 @@ public class ContactHelper extends HelperBase {
         attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
-            if (wd.findElement(By.name("new_group")).getAttribute("value").equals("[none]")) {
+            assertTrue(wd.findElement(By.name("new_group")).getAttribute("value").equals("[none]"));
+            if (contactData.getGroups().size() > 0) {
+                assertTrue(contactData.getGroups().size() == 1);
                 new Select(wd.findElement(By.name("new_group")))
                         .selectByVisibleText(contactData.getGroups().iterator().next().getGroupName());
             }
         } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
+            assertTrue(contactData.getGroups().size() == 0);
+            assertFalse(isElementPresent(By.name("new_group")));
         }
 
         typeValue(By.name("home"), contactData.getHomePhone());
@@ -76,6 +84,10 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("home page"));
     }
 
+    public void goToGroupPage(GroupData group) {
+        click(By.linkText("group page \"" + group.getGroupName() + "\""));
+    }
+
     public void create(ContactData contact) {
         initContactCreation();
         fillContactCreationForm(contact, true);
@@ -98,6 +110,28 @@ public class ContactHelper extends HelperBase {
         deleteSelectedContact();
         acceptAlert();
         contactCache = null;
+    }
+
+    public void addGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(group.getGroupId()));
+        wd.findElement(By.name("add")).click();
+        goToGroupPage(group);
+        assertTrue(wd.findElement(By.xpath(String.format("//a[@href='edit.php?id=%s']", contact.getId()))).isDisplayed());
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+    }
+
+    public void removeGroup(ContactData contact) {
+        GroupData group = contact.getGroups().iterator().next();
+        goToSelectedGroup(group);
+        selectContactById(contact.getId());
+        wd.findElement(By.name("remove")).click();
+        goToGroupPage(group);
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+    }
+
+    private void goToSelectedGroup(GroupData group) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(group.getGroupId()));
     }
 
     public boolean isThereAContact() {

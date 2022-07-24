@@ -56,11 +56,26 @@ public class CreateContactTests extends BaseTest {
     }
   }
 
-  @Test(dataProvider = "validContactsFromJson")
-  public void testContactCreate(ContactData contact) throws Exception {
+//  @Test(dataProvider = "validContactsFromJson")
+//  public void testContactCreate(ContactData contact) throws Exception {
+  @Test
+  public void testContactCreate() throws Exception {
     Groups groups = app.db().groups();
     Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/photo1.png");
+    ContactData contact = new ContactData()
+            .withFirstName("Караван")
+            .withLastName("Караванов")
+            .withAddress("")
+            .withEmail1("karavan@mail.ru")
+            .withEmail2("maravan@mail.ru")
+            .withEmail3("")
+            .withPhoto(photo)
+            .withMobilePhone("+79151591519")
+            .withHomePhone("+79152582858")
+            .withWorkPhone("")
+            .withSecondPhone("")
+            .inGroup(groups.iterator().next());
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();

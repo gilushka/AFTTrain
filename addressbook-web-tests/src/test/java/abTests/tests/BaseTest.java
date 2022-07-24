@@ -13,6 +13,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -79,6 +80,49 @@ public class BaseTest {
                 .stream().filter(s -> ! s.equals(""))
                 .map(ContactDataTests::cleaned)
                 .collect(Collectors.joining("\n"));
+    }
+
+    public void checkGroupExisting(Groups groups) {
+        if (groups.size() == 0) {
+            addGroupInAddressbook(groups);
+        }
+    }
+
+    public void checkContactExisting(Contacts contacts) {
+        if (contacts.size() == 0) {
+            File photo = new File("src/test/resources/photo1.png");
+            ContactData contact = new ContactData()
+                    .withFirstName("Перилидон")
+                    .withLastName("Перилидонский")
+                    .withAddress("")
+                    .withEmail1("perilidon@mail.ru")
+                    .withEmail2("")
+                    .withEmail3("")
+                    .withPhoto(photo)
+                    .withMobilePhone("+79153573757")
+                    .withHomePhone("")
+                    .withWorkPhone("")
+                    .withSecondPhone("");
+            app.contact().create(contact);
+            assertThat(app.contact().count(), equalTo(1));
+            contacts.add(contact);
+        }
+    }
+
+    public void addGroupInAddressbook(Groups groups) {
+        int groupCount = groups.size();
+        app.goTo().groupPage();
+        GroupData group = createNewGroup();
+        app.group().create(group);
+        assertThat(app.group().count(), equalTo(groupCount + 1));
+        app.goTo().mainForm();
+    }
+
+    public GroupData createNewGroup() {
+        return new GroupData()
+                .withGroupName("Предусловное имя")
+                .withGroupHeader("Предусловный хэдер")
+                .withGroupFooter("Предусловный футер");
     }
 
     public static String cleaned(String phone) {

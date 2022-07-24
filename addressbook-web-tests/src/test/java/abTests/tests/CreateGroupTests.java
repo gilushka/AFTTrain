@@ -58,10 +58,16 @@ public class CreateGroupTests extends BaseTest {
     }
   }
 
-  @Test(dataProvider = "validGroupsFromJson")
-  public void testGroupCreate(GroupData group){
+//  @Test(dataProvider = "validGroupsFromJson")
+//  public void testGroupCreate(GroupData group){
+  @Test
+  public void testGroupCreate(){
     app.goTo().groupPage();
     Groups before = app.db().groups();
+    GroupData group = new GroupData()
+            .withGroupName("Пухлики")
+            .withGroupHeader("Пухляши")
+            .withGroupFooter("Пухтышки");
     app.group().create(group);
     assertThat(app.group().count(), equalTo(before.size() + 1));
     Groups after = app.db().groups();
