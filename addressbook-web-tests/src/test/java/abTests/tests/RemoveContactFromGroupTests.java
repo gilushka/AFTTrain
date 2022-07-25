@@ -21,17 +21,26 @@ public class RemoveContactFromGroupTests extends BaseTest{
         Contacts contacts = app.db().contacts();
         //Проверяем, что хотя бы один контакт существует, иначе создаем новый
         checkContactExisting(contacts);
-        //Выбираем контакт входящий хотя бы в одну группу
+        //Получаем контакт входящий хотя бы в одну группу
+        ContactData contact = getContactWithGroup(contacts, groups);
+
+        app.contact().removeGroup(contact);
+        Contacts after = app.db().contacts();
+
+        assertThat(after, equalTo(contacts.without(contact).withAdded(contact)));
+    }
+
+
+    private ContactData getContactWithGroup(Contacts contacts, Groups groups) {
         ContactData contact = chooseContactWithGroup(contacts);
         if (contact == null) {
             contact = contacts.iterator().next();
             app.contact().addGroup(contact, groups.iterator().next());
             app.goTo().mainForm();
+            contacts = app.db().contacts();
+            contact = chooseContactWithGroup(contacts);
         }
-        app.contact().removeGroup(contact);
-        Contacts after = app.db().contacts();
-
-        assertThat(after, equalTo(contacts.without(contact).withAdded(contact)));
+        return contact;
     }
 
     private ContactData chooseContactWithGroup(Contacts contacts) {

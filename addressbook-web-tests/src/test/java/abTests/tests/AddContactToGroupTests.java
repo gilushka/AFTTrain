@@ -26,6 +26,8 @@ public class AddContactToGroupTests extends BaseTest{
         ContactData contact = contacts.iterator().next();
         //Проверяем, что выбранный контакт не входит во все имеющиеся группы, иначе создаем новую
         checkContactInAllGroups(contact, groups);
+        groups = app.db().groups();
+        contact = app.db().contacts().iterator().next();
         GroupData group = chooseAddingGroup(contact, groups);
         app.contact().addGroup(contact, group);
         Contacts after = app.db().contacts();
