@@ -19,6 +19,10 @@ public class ApplicationManager {
     private String browser;
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
+    private MailHelper mailHelper;
+    private DbHelper db;
+    private NavigationHelper navigationHelper;
+    private ChangePasswordHelper changePasswordHelper ;
 
     public ApplicationManager(String browser){
         this.browser = browser;
@@ -56,6 +60,34 @@ public class ApplicationManager {
             ftp = new FtpHelper(this);
         }
         return ftp;
+    }
+
+    public DbHelper db() {
+        if (db == null) {
+            db = new DbHelper();
+        }
+        return db;
+    }
+
+    public NavigationHelper goTo() {
+        if (navigationHelper == null) {
+            navigationHelper = new NavigationHelper(this);
+        }
+        return navigationHelper;
+    }
+
+    public ChangePasswordHelper changePassword() {
+        if (changePasswordHelper == null) {
+            changePasswordHelper = new ChangePasswordHelper(this);
+        }
+        return changePasswordHelper;
+    }
+
+    public MailHelper mail() {
+        if (mailHelper == null) {
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
     }
 
     public WebDriver getDriver() {
