@@ -22,9 +22,10 @@ public class ChangePasswordTests extends BaseTest {
 
     @Test
     public void testChangePassword() throws MessagingException, IOException {
+        long now = System.currentTimeMillis();
         User user = app.db().users().iterator().next();
         String userName = user.getUsername();
-        String password = "oneMorePassword";
+        String password = String.format("password%s", now);
         String email = user.getEmail();
         //Шаг 1
         app.goTo().login(app.getProperty("admin.login"), app.getProperty("admin.password"));

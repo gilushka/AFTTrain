@@ -13,17 +13,16 @@ public class User {
 
     @Id
     @Column(name = "id")
-    private String id;
+    private int id;
 
     @Column(name = "username")
     private String username;
 
     @Column(name = "email")
-    @Type(type = "text")
     private String email;
 
     public String getId() {
-        return id;
+        return String.valueOf(id);
     }
 
     public String getUsername() {
