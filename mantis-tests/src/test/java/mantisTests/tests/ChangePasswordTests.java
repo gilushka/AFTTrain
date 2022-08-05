@@ -33,7 +33,7 @@ public class ChangePasswordTests extends BaseTest {
         app.goTo().user(userName);
         //Шаг 2
         app.changePassword().init();
-        List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+        List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
         app.registration().finish(confirmationLink, password);
         //Шаг 3
