@@ -23,7 +23,8 @@ public class ChangePasswordTests extends BaseTest {
     @Test
     public void testChangePassword() throws MessagingException, IOException {
         long now = System.currentTimeMillis();
-        User user = app.db().users().iterator().next();
+        Users users = app.db().users();
+        User user = getUser(users);
         String userName = user.getUsername();
         String password = String.format("password%s", now);
         String email = user.getEmail();
@@ -38,6 +39,15 @@ public class ChangePasswordTests extends BaseTest {
         app.registration().finish(confirmationLink, password);
         //Шаг 3
         assertTrue(app.newSession().login(userName, password));
+    }
+
+    private User getUser(Users users) {
+        for (User user: users) {
+            if (!"administrator".equals(user.getUsername())) {
+                return user;
+            }
+        }
+        throw new Error("No existing users in DataBase");
     }
 
     @AfterTest(alwaysRun = true)
