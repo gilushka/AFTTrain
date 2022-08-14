@@ -1,16 +1,13 @@
 package mantisTests.tests;
 
-import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
-import biz.futureware.mantis.rpc.soap.client.ProjectData;
 import mantisTests.model.Issue;
 import mantisTests.model.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.xml.rpc.ServiceException;
+import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.Set;
 
@@ -36,9 +33,13 @@ public class SoapTests extends BaseTest {
     }
 
     @Test
-    public void testGetIssue() throws MalformedURLException, ServiceException, RemoteException {
-        int id = 0000002;
-        skipIfNotFixed(id);
-        app.soap().getIssue(id);
+    public void testIsIssueFixed() throws IOException, ServiceException {
+        //Переключатель проверки soap/rest
+        boolean soap = false;
+        //Для mantis
+//        int id = 0000001;
+        //Для bugify
+        int id = 198;
+        skipIfNotFixed(id, soap);
     }
 }

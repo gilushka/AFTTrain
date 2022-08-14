@@ -67,7 +67,6 @@ public class SoapHelper {
         MantisConnectPortType mc = getMantisConnect();
         String status =
                 mc.mc_issue_get(app.getProperty("admin.login"), app.getProperty("admin.password"), BigInteger.valueOf(issueId)).getStatus().getName();
-//        System.out.println(String.format("Статус бага с id = %s равен %s", issueId, status));
         return !"resolved".equals(status);
     }
 }

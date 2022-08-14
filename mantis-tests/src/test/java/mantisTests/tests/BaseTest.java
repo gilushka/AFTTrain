@@ -10,6 +10,7 @@ import ru.lanwen.verbalregex.VerbalExpression;
 
 import javax.xml.rpc.ServiceException;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -36,12 +37,16 @@ public class BaseTest {
         return regex.getText(mailMessage.text);
     }
 
-    boolean isIssueOpen(int issueId) throws MalformedURLException, ServiceException, RemoteException {
-        return app.soap().checkIssueOpen(issueId);
+    boolean isIssueOpen(int issueId, boolean soap) throws IOException, ServiceException {
+        if (soap) {
+            return app.soap().checkIssueOpen(issueId);
+        } else {
+            return app.rest().checkIssueOpen(issueId);
+        }
     }
 
-    public void skipIfNotFixed(int issueId) throws MalformedURLException, ServiceException, RemoteException {
-        if (isIssueOpen(issueId)) {
+    public void skipIfNotFixed(int issueId, boolean soap) throws IOException, ServiceException {
+        if (isIssueOpen(issueId, soap)) {
             throw new SkipException("Ignored because of issue " + issueId);
         }
     }
