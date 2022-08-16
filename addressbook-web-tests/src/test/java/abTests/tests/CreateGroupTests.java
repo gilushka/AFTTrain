@@ -4,8 +4,8 @@ import abTests.model.ContactData;
 import abTests.model.GroupData;
 import abTests.model.Groups;
 import com.google.gson.Gson;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+//import com.sun.org.slf4j.internal.Logger;
+//import com.sun.org.slf4j.internal.LoggerFactory;
 import com.thoughtworks.xstream.XStream;
 import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.*;
@@ -22,7 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CreateGroupTests extends BaseTest {
 
-  Logger logger = LoggerFactory.getLogger(CreateGroupTests.class);
+//  Logger logger = LoggerFactory.getLogger(CreateGroupTests.class);
 //  private Properties properties;
 
   @DataProvider
