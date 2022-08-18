@@ -43,7 +43,7 @@ public class ChangePasswordTests extends BaseTest {
 
     private User getUser(Users users) {
         for (User user: users) {
-            if (!"administrator".equals(user.getUsername())) {
+            if (!app.getProperty("admin.login").equals(user.getUsername())) {
                 return user;
             }
         }
