@@ -35,11 +35,11 @@ public class SoapTests extends BaseTest {
     @Test
     public void testIsIssueFixed() throws IOException, ServiceException {
         //Переключатель проверки soap/rest
-        boolean soap = false;
+        boolean soap = true;
         //Для mantis
-//        int id = 0000001;
+        int id = 0000002;
         //Для bugify
-        int id = 198;
+//        int id = 198;
         skipIfNotFixed(id, soap);
     }
 }
