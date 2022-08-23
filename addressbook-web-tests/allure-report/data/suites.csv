@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Mon Aug 22 22:39:55 MSK 2022","Mon Aug 22 22:39:58 MSK 2022","3062","Suite1","Groups","abTests.tests.CreateGroupTests","abTests.tests.CreateGroupTests","testBadGroupCreate","testBadGroupCreate",""
+"passed","Mon Aug 22 22:40:01 MSK 2022","Mon Aug 22 22:40:04 MSK 2022","2897","Suite1","Groups","abTests.tests.ModificateGroupTest","abTests.tests.ModificateGroupTest","testGroupModification","testGroupModification",""
+"passed","Mon Aug 22 22:40:05 MSK 2022","Mon Aug 22 22:40:07 MSK 2022","2419","Suite1","Groups","abTests.tests.DeleteGroupTests","abTests.tests.DeleteGroupTests","testGroupDelete","testGroupDelete",""
+"passed","Mon Aug 22 22:39:58 MSK 2022","Mon Aug 22 22:40:01 MSK 2022","3298","Suite1","Groups","abTests.tests.CreateGroupTests","abTests.tests.CreateGroupTests","testGroupCreate","testGroupCreate",""

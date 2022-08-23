@@ -8,10 +8,8 @@ import abTests.model.Groups;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.ITestContext;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.util.Arrays;
@@ -20,13 +18,15 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Listeners(MyTestListener.class)
 public class BaseTest {
 
     protected static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
     @BeforeSuite
-    public void setUp() throws Exception {
+    public void setUp(ITestContext context) throws Exception {
         app.init();
+        context.setAttribute("app", app);
     }
 
     @AfterSuite

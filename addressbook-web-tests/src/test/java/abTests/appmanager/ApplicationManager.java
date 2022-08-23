@@ -1,6 +1,8 @@
 package abTests.appmanager;
 
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -90,5 +92,9 @@ public class ApplicationManager {
 
     public Properties getProperties() {
         return properties;
+    }
+
+    public byte[] takeScreenshot() {
+        return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
     }
 }
